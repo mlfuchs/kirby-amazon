@@ -33,21 +33,9 @@ kirbytext::$tags['amazon'] = array(
 
                 $thumb_link = thumb($image, array("width" => 180, "height" => 180))->url();
 
-                // Start editing your output HTML from here
-                $output = '<figure class="amazon">';
-                $output .= '<a href="'.urldecode($pxml->Items->Item->DetailPageURL).'" target="_blank">';
-                $output .= '<img class="col-sm-3" src="'.$thumb_link.'" >';
-
-                $output .= '<div class="col-sm-9">';
-                $output .= '<h3>'.$pxml->Items->Item->ItemAttributes->Title.'</h3>';
-                $output .= '<p>Buy now at Amazon for '.$pxml->Items->Item->OfferSummary->LowestNewPrice->FormattedPrice.'</p>';
-                $output .= '<small>Affiliatelink used.</small>';
-
-                $output .= '</div></a></figure>';
-
-
-
-                return $output;
+                ob_start();
+                include ('template.php');
+                return ob_get_clean();
 
             }
         }
